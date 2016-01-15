@@ -1,0 +1,5 @@
+name: techInAsiaApi
+dependencies:
+- python
+- numpy
+- flask
