@@ -3,3 +3,5 @@ dependencies:
 - python
 - numpy
 - flask
+- flask-restful
+- psycopg2
