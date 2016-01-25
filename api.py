@@ -8,8 +8,6 @@ import graph as gpy
 ## Create connection to PSQL
 
 conn = psycopg2.connect("dbname = dev_techinasia user = michaelhi host = localhost")
-print conn.encoding
-
 
 app = Flask(__name__)
 
@@ -58,11 +56,14 @@ def countries():
     response = {"countries": [country["country"] for country in mike]}
     return json.dumps(response, ensure_ascii=False)
 
-@app.route("/industryGraph/<industry>")
+@app.route("/industryGraph/<string:industry>")
 def industryGraph(industry):
-    if 'industry' in request.args:
-        industry = request.args["industry"].replace("_", " ")
-        response = gpy.main(industry,conn)
+    print industry
+    if 'subgraphs' in request.args:
+        subgraphs = request.args["subgraphs"]
+        subgraphs = int(subgraphs)
+        industry = industry.replace("_"," ")
+        response = gpy.main(industry,conn, subgraphs)
         return json.dumps(response, ensure_ascii=False)
     else:
         return "PLEASE ADD AN INDUSTRY ARGUMENT"

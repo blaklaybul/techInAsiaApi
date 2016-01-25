@@ -5,7 +5,7 @@ from psycopg2.extras import RealDictCursor
 import networkx as nx
 from networkx.readwrite import json_graph
 
-def main(industry,conn, subgraphs):
+def main(industry,conn,subgraphs):
 
     nodes = getNodes(industry,conn)
     node_lookup = {
@@ -33,6 +33,7 @@ def main(industry,conn, subgraphs):
     }
 
     dump_it = NetworkAnalysis(for_export, subgraphs)
+    print dump_it
     return dump_it
 
 def getLinks(industry,conn):
@@ -111,13 +112,15 @@ def NetworkAnalysis(jsonGraph,subgraphs):
 
     G = json_graph.node_link_graph(jsonGraph)
     graphs = sorted(nx.connected_component_subgraphs(G), key = len, reverse=True)
-
-    tuple(GC + str(i) for i in range(subgraphs)) = graphs[0:subgraphs]
-    top5 = nx.compose_all([GC1,GC2,GC3,GC4,GC5])
-    deg = top5.degree()
-    nx.set_node_attributes(top5, "degree", deg)
+    print len(graphs[0:subgraphs])
+    topn = nx.compose_all(graphs[0:subgraphs])
+    print topn, "\n\n\n"
+    deg = topn.degree()
+    cent_deg = nx.degree_centrality(topn)
+    nx.set_node_attributes(topn, "degree", deg)
+    nx.set_node_attributes(topn, "cent_deg", cent_deg)
     take = {
-        "nodes": json_graph.node_link_data(top5)["nodes"],
-        "links": json_graph.node_link_data(top5)["links"]
+        "nodes": json_graph.node_link_data(topn)["nodes"],
+        "links": json_graph.node_link_data(topn)["links"]
         }
     return take
