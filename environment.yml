@@ -5,3 +5,4 @@ dependencies:
 - flask
 - flask-restful
 - psycopg2
+- networkx

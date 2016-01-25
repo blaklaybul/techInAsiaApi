@@ -3,6 +3,8 @@ from flask_restful import Resource, Api
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
+import graph as gpy
+
 ## Create connection to PSQL
 
 conn = psycopg2.connect("dbname = dev_techinasia user = michaelhi host = localhost")
@@ -56,12 +58,12 @@ def countries():
     response = {"countries": [country["country"] for country in mike]}
     return json.dumps(response, ensure_ascii=False)
 
-@app.route("/industryGraph")
-def industryGraph():
-    cur = conn.cursor(cursor_factory=RealDictCursor)
+@app.route("/industryGraph/<industry>")
+def industryGraph(industry):
     if 'industry' in request.args:
         industry = request.args["industry"].replace("_", " ")
-
+        response = gpy.main(industry,conn)
+        return json.dumps(response, ensure_ascii=False)
     else:
         return "PLEASE ADD AN INDUSTRY ARGUMENT"
 
