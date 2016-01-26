@@ -27,25 +27,24 @@ function buildGraphs(){
     //     console.log(top_industries[i]);
     //     new Graph(top_industries[i],subgraphs);
     // }
-
-var graph2 = new Graph("Games",12);
-   var graph3 = new Graph("SaaS",12);
-   var graph4 = new Graph("News",12);
-   var graph5 = new Graph("Education Tech",12);
-   var graph6 = new Graph("Software",12);
-   var graph7 = new Graph("Fashion",12);
-   var graph7 = new Graph("Digital Media",12);
-   var graph7 = new Graph("Restaurants and food",12);
-   var graph7 = new Graph("Web Design",12);
-   var graph7 = new Graph("Financial Services",12);
-   var graph7 = new Graph("Enterprise Software",12);
-   var graph7 = new Graph("Social Media",12);
-   var graph7 = new Graph("Transportation",12);
-   var graph7 = new Graph("Social Networking",12);
-   var graph7 = new Graph("Human Resource",12);
-   var graph7 = new Graph("Shopping",12);
-   var graph7 = new Graph("Services",12);
-   var graph7 = new Graph("Health Care",12);
+   new Graph("Games",12);
+   new Graph("SaaS",12);
+   new Graph("News",12);
+   new Graph("Education Tech",12);
+   new Graph("Software",12);
+   new Graph("Fashion",12);
+   new Graph("Digital Media",12);
+   new Graph("Restaurants and food",12);
+   new Graph("Web Design",12);
+   new Graph("Financial Services",12);
+   new Graph("Enterprise Software",12);
+   new Graph("Social Media",12);
+   new Graph("Transportation",12);
+   new Graph("Social Networking",12);
+   new Graph("Human Resource",12);
+   new Graph("Shopping",12);
+   new Graph("Services",12);
+   new Graph("Health Care",12);
 
 }
 

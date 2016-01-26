@@ -53,6 +53,8 @@ def countries():
     cur.execute(query)
     mike = cur.fetchall()
     response = {"countries": [country["country"] for country in mike]}
+    with open("countries.json", "wb") as f:
+        json.dump(response,f)
     return json.dumps(response, ensure_ascii=False)
 
 @app.route("/industries")
@@ -74,6 +76,9 @@ def industryGraph(industry):
         subgraphs = int(subgraphs)
         industry = industry.replace("_"," ")
         response = gpy.main(industry,conn, subgraphs)
+        file = industry.replace(" ", "_") + "_" + str(subgraphs) + ".json"
+        with open(file, "wb") as f:
+            json.dump(response, f)
         return json.dumps(response, ensure_ascii=False)
     else:
         return "PLEASE ADD AN INDUSTRY ARGUMENT"

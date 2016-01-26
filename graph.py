@@ -116,6 +116,8 @@ def NetworkAnalysis(jsonGraph,subgraphs):
     graphs = sorted(nx.connected_component_subgraphs(G), key = len, reverse=True)
     nodes = [len(graph.nodes()) for graph in graphs]
     subgraphs_nodes = [len(graph.nodes()) for graph in graphs[0:subgraphs]]
+    print nodes
+    print subgraphs_nodes
     frac = sum(subgraphs_nodes)/sum(nodes)
     print subgraphs, "represents", frac*100, "% of nodes"
     topn = nx.compose_all(graphs[0:subgraphs])
