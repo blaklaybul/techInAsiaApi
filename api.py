@@ -1,5 +1,4 @@
-from flask import Flask, request, url_for, json
-from flask_restful import Resource, Api
+from flask import Flask, request, url_for, json, render_template, send_from_directory
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
@@ -21,7 +20,7 @@ def after_request(response):
 
 @app.route("/")
 def api_root():
-    return "Welcome to the Startup API"
+    return send_from_directory("static","index.html")
 
 @app.route("/startups")
 def startups():

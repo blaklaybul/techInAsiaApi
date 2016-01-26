@@ -125,6 +125,7 @@ def NetworkAnalysis(jsonGraph,subgraphs):
     nx.set_node_attributes(topn, "cent_deg", cent_deg)
     take = {
         "nodes": json_graph.node_link_data(topn)["nodes"],
-        "links": json_graph.node_link_data(topn)["links"]
+        "links": json_graph.node_link_data(topn)["links"],
+        "frac" : frac
         }
     return take
