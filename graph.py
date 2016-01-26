@@ -1,3 +1,4 @@
+from __future__ import division
 import sys
 import json
 import psycopg2
@@ -32,7 +33,6 @@ def main(industry,conn,subgraphs):
         }
     }
 
-    print for_export
     dump_it = NetworkAnalysis(for_export, subgraphs)
     return dump_it
 
@@ -114,7 +114,10 @@ def NetworkAnalysis(jsonGraph,subgraphs):
 
     G = json_graph.node_link_graph(jsonGraph)
     graphs = sorted(nx.connected_component_subgraphs(G), key = len, reverse=True)
-    print len(graphs[0:subgraphs])
+    nodes = [len(graph.nodes()) for graph in graphs]
+    subgraphs_nodes = [len(graph.nodes()) for graph in graphs[0:subgraphs]]
+    frac = sum(subgraphs_nodes)/sum(nodes)
+    print subgraphs, "represents", frac*100, "% of nodes"
     topn = nx.compose_all(graphs[0:subgraphs])
     deg = topn.degree()
     cent_deg = nx.degree_centrality(topn)
