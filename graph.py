@@ -32,8 +32,8 @@ def main(industry,conn,subgraphs):
         }
     }
 
+    print for_export
     dump_it = NetworkAnalysis(for_export, subgraphs)
-    print dump_it
     return dump_it
 
 def getLinks(industry,conn):
@@ -70,6 +70,7 @@ def getNodes(industry,conn):
             from(
                 select distinct
                     f.tiacompanyid as name
+                    , s.companyname as coName
                     , 1 as group
                     , s.country as location
                 from fundingstages f
@@ -87,6 +88,7 @@ def getNodes(industry,conn):
                 UNION ALL
                 select distinct
                     i.tiainvestorid as name
+                    , ii.investorname as coName
                     , 2 as group
                     , ii.investorlocation as location
                 from fundingstages f
@@ -114,7 +116,6 @@ def NetworkAnalysis(jsonGraph,subgraphs):
     graphs = sorted(nx.connected_component_subgraphs(G), key = len, reverse=True)
     print len(graphs[0:subgraphs])
     topn = nx.compose_all(graphs[0:subgraphs])
-    print topn, "\n\n\n"
     deg = topn.degree()
     cent_deg = nx.degree_centrality(topn)
     nx.set_node_attributes(topn, "degree", deg)
